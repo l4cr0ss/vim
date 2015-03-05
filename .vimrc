@@ -59,4 +59,5 @@ function! DoPrettyXML()
   exe "set ft=" . l:origft
 endfunction
 command! PrettyXML call DoPrettyXML()
-command! pq call DoPrettyXML()
+command! Pq call DoPrettyXML()
+command! PQ call DoPrettyXML()
