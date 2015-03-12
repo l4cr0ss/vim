@@ -61,3 +61,5 @@ endfunction
 command! PrettyXML call DoPrettyXML()
 command! Pq call DoPrettyXML()
 command! PQ call DoPrettyXML()
+
+:syntax on
