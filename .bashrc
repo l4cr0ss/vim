@@ -45,12 +45,12 @@ esac
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
+        # We have color support; assume it's compliant with Ecma-48
+        # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+        # a case would tend to support setf rather than setaf.)
+        color_prompt=yes
     else
-	color_prompt=
+        color_prompt=
     fi
 fi
 
@@ -81,10 +81,6 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
-# some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -139,8 +135,8 @@ alias mkdir='mkdir -p'
 
 #The ls family
 
+# some more ls aliases
 alias ll='ls -l --group-directories-first'
-alias ls='ls -hFl --color'  # add colors for filetype recognition
 alias la='ls -hFAl --color' # show hidden files
 alias lx='ls -lXB'         # sort by extension
 alias lk='ls -lSr'         # sort by size, biggest last
@@ -155,7 +151,7 @@ alias tree='tree -Csu'     # nice alternative to 'recursive ls'
 
 function cd()
 {
-	builtin cd "$*" && ls
+        builtin cd "$*" && l
 }
 
 #Set 'e' as 'vim' on the commandline
@@ -166,3 +162,9 @@ alias e='vim'
 alias p3='python3'
 
 export HISTIZE=1000
+
+export PATH="$PATH:/usr/bin:/usr/sbin"
+
+#Export and eval for rbenv
+export PATH="$HOME/.rbenv/bin:$HOME/bin:$PATH"
+eval "$(rbenv init -)"
