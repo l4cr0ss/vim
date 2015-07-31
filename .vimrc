@@ -23,7 +23,7 @@ command W w
 command WQ wq
 command Wq wq
 
-" Switch between different indent styles 
+" Switch between different indent styles
 nmap \n :set noexpandtab tabstop=8 shiftwidth=8<CR>
 nmap \p :set noexpandtab tabstop=4 shiftwidth=4<CR>
 nmap \P :set expandtab tabstop=4 shiftwidth=4<CR>
@@ -66,4 +66,3 @@ endfunction
 command! PrettyXML call DoPrettyXML()
 command! Pq call DoPrettyXML()
 command! PQ call DoPrettyXML()
-
