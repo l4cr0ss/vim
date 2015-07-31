@@ -45,12 +45,12 @@ esac
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
+        # We have color support; assume it's compliant with Ecma-48
+        # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+        # a case would tend to support setf rather than setaf.)
+        color_prompt=yes
     else
-	color_prompt=
+        color_prompt=
     fi
 fi
 
@@ -136,9 +136,6 @@ alias mkdir='mkdir -p'
 #The ls family
 
 # some more ls aliases
-alias ls='ls --color'
-alias l='ls --color'
-alias la='ls -A'
 alias ll='ls -l --group-directories-first'
 alias la='ls -hFAl --color' # show hidden files
 alias lx='ls -lXB'         # sort by extension
@@ -154,7 +151,7 @@ alias tree='tree -Csu'     # nice alternative to 'recursive ls'
 
 function cd()
 {
-	builtin cd "$*" && l
+        builtin cd "$*" && l
 }
 
 #Set 'e' as 'vim' on the commandline
@@ -171,4 +168,3 @@ export PATH="$PATH:/usr/bin:/usr/sbin"
 #Export and eval for rbenv
 export PATH="$HOME/.rbenv/bin:$HOME/bin:$PATH"
 eval "$(rbenv init -)"
-
