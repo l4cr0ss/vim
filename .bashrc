@@ -96,8 +96,4 @@ function cd()
 #Set 'e' as 'vim' on the commandline
 alias e='vim'
 
-#Shortcut for python 3
-alias python='python3'
-alias p='python3'
-
 export PATH="$PATH:/usr/bin:/usr/sbin"
