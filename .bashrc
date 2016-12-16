@@ -128,6 +128,8 @@ alias ga='git add .'
 alias gc='git commit'
 alias gd='git diff'
 alias gs='git status'
+alias gp='git push'
+alias gca='git commit --amend'
 
 # Set the current active project
 function sap() {
