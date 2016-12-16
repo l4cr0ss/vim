@@ -1,38 +1,73 @@
-set nocompatible
+" Hide buffers instead of closing them
+set hidden
 
-filetype on
-syntax on
-set hlsearch
+" Remember undo history
+set undofile
+set undodir=$HOME/.vim/history/
 
-" Remember cursor location
-if has("autocmd")
-  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-endif
+" Maps for common typos
+command! W w
+command! Q q
+command! WQ wq
+command! Wq wq
 
-" Tab settings
-set tabstop=8
-set shiftwidth=8
+" Default tabstop/shiftwidth/tab settings
+set ts=2 sw=2 expandtab
+
+" Perform autoindent
 set autoindent
+
+" Turn on line numbers by default
 set number
 
-" Color settings
-color desert
+" Configure pathogen for plugins
+execute pathogen#infect()
 
-" Remaps
-command Q q
-command W w
-command WQ wq
-command Wq wq
+" Set the leader key combo
+let mapleader=""
 
-" Switch between different indent styles
-nmap \n :set noexpandtab tabstop=8 shiftwidth=8<CR>
-nmap \p :set noexpandtab tabstop=4 shiftwidth=4<CR>
-nmap \P :set expandtab tabstop=4 shiftwidth=4<CR>
-nmap \h :set expandtab tabstop=2 shiftwidth=2<CR>
+" Key combo for editing .vimrc and automatically reloading
+nnoremap <leader>ev :e ~/.vimrc<CR>
+augroup automaticallySourceVimrc
+  au!
+  au bufwritepost .vimrc source ~/.vimrc
+augroup END
 
-" Toggle line wrap
-nmap \w :setlocal wrap!<CR>:setlocal wrap?<CR>
+" Maps for moving to the beginning/end of the line
+nnoremap <leader>d $
+nnoremap <leader>a 0
 
-set shell=bash\ --login
-nnoremap <F12> :!deploy<CR>
+" Nop the help shortcut in all modes
+nnoremap <F1> <nop>
+inoremap <F1> <nop>
+vnoremap <F1> <nop>
 
+" Maps for adding empty lines above/below cursor in normal mode
+nnoremap zj moo<esc>k`o
+nnoremap zk moO<esc>`o
+
+" Maps for saving the current buffer
+nnoremap ;; :w<CR>
+nnoremap <leader>; :wq<CR>
+
+" Maps for quitting without saving
+nnoremap <leader><Return> :q!<CR>
+
+" Options for the FormatSQL plugin
+let sqlutil_align_comma=1
+let sqlutil_align_where=1
+let sqlutil_align_first_word=1
+vmap <leader>fsql :SQLUFormatter<CR>
+
+" Maps for Elixir's mix utility
+inoremap <leader>mc :!mix compile<CR>
+nnoremap <leader>mc :!mix compile<CR>
+inoremap <leader>mpr ^[:!mix phoenix.routes<CR>
+nnoremap <leader>mpr ^[:!mix phoenix.routes<CR>
+
+" Set hotkey for toggling 'paste' mode
+set pastetoggle=<leader>p
+
+" Maps for moving forward/backward between buffers based on last file edited
+nnoremap <leader>q :BufSurfBack<CR>
+nnoremap <leader>w :BufSurfForward<CR>
