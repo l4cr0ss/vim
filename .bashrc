@@ -150,16 +150,18 @@ alias gta='cd $ACTIVE_PROJECT'
 alias er='vim $HOME/.bashrc; source $HOME/.bashrc;'
 alias rr='source $HOME/.bashrc'
 
-# Navigation commands for Phoenix/Elixir
+function cd() {
+  if [ -z "$1" ]
+  then
+    builtin cd
+  else 
+    echo "Arg is $1"
+    builtin cd $1
+  fi
+  /usr/bin/clear
+  ls
+}
 
-# phoenix_go-templates
-alias pgt='cd $ACTIVE_PROJECT/web/templates;'
-# phoenix edit-router
-alias per='vim $ACTIVE_PROJECT/web/router.ex'
-# phoenix go-assets
-alias pga='cd $ACTIVE_PROJECT/web/static/'
-
-alias clear='clear; ls'
 function ls() {
   if [ -z "$1" ]
   then
@@ -170,14 +172,23 @@ function ls() {
   fi
 }
 
-function cd() {
-  if [ -z "$1" ]
-  then
-    builtin cd
-  else 
-    builtin cd $1
-  fi
+function clear() {
   /usr/bin/clear
-  ls
+  /bin/ls
 }
+alias c='clear'
 
+# Navigation commands for Phoenix/Elixir
+
+# phoenix_go-templates
+alias pgt='cd $ACTIVE_PROJECT/web/templates;'
+# phoenix edit-router
+alias per='vim $ACTIVE_PROJECT/web/router.ex'
+# phoenix go-assets
+alias pga='cd $ACTIVE_PROJECT/web/static/'
+# phoenix go-fonts
+alias pgf='cd $ACTIVE_PROJECT/web/static/assets/fonts'
+# phoenix go-javascripts
+alias pgj='cd $ACTIVE_PROJECT/web/static/js'
+# phoenix go-css
+alias pgc='cd $ACTIVE_PROJECT/web/static/css'
