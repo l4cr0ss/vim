@@ -150,18 +150,6 @@ alias gta='cd $ACTIVE_PROJECT'
 alias er='vim $HOME/.bashrc; source $HOME/.bashrc;'
 alias rr='source $HOME/.bashrc'
 
-function cd() {
-  if [ -z "$1" ]
-  then
-    builtin cd
-  else 
-    echo "Arg is $1"
-    builtin cd $1
-  fi
-  /usr/bin/clear
-  ls
-}
-
 function ls() {
   if [ -z "$1" ]
   then
@@ -174,9 +162,23 @@ function ls() {
 
 function clear() {
   /usr/bin/clear
-  /bin/ls
+  /bin/ls --color=auto
 }
+
+function cd() {
+  if [ -z "$1" ]
+  then
+    builtin cd
+  else 
+    echo "Arg is $1"
+    builtin cd $1
+  fi
+  clear
+}
+
 alias c='clear'
+alias v='vim'
+alias e='vim'
 
 # Navigation commands for Phoenix/Elixir
 
@@ -192,3 +194,8 @@ alias pgf='cd $ACTIVE_PROJECT/web/static/assets/fonts'
 alias pgj='cd $ACTIVE_PROJECT/web/static/js'
 # phoenix go-css
 alias pgc='cd $ACTIVE_PROJECT/web/static/css'
+#phoenix new
+function mpn() {
+  cd $HOME/elixir/
+  mix phoenix.new $1
+}

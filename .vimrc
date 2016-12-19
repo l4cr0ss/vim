@@ -71,3 +71,5 @@ set pastetoggle=<leader>p
 " Maps for moving forward/backward between buffers based on last file edited
 nnoremap <leader>q :BufSurfBack<CR>
 nnoremap <leader>w :BufSurfForward<CR>
+
+syntax enable
