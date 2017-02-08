@@ -72,4 +72,10 @@ set pastetoggle=<leader>p
 nnoremap <leader>q :BufSurfBack<CR>
 nnoremap <leader>w :BufSurfForward<CR>
 
+" Make the variable under the cursor into a pointer
+inoremap <leader>mp <C-O>ciw*<C-O>p
+
+"Paste the 0 register in insert mode
+inoremap <leader>po <C-O>"0p
+
 syntax enable

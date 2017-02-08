@@ -105,7 +105,6 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
@@ -121,9 +120,10 @@ if ! shopt -oq posix; then
   fi
 fi
 
-alias mps='mix phoenix.server'
+# Ignore <C-s> scroll lock instructions
 stty -ixon
 
+# Alias common git commands
 alias ga='git add .'
 alias gc='git commit'
 alias gd='git diff'
@@ -150,6 +150,18 @@ alias gta='cd $ACTIVE_PROJECT'
 alias er='vim $HOME/.bashrc; source $HOME/.bashrc;'
 alias rr='source $HOME/.bashrc'
 
+# Clear the screen before running make
+function make() {
+	command clear
+	if [ -z "$1" ]
+	then
+		command make
+	else
+		command make $1
+	fi
+}
+
+# Clear the screen before listing
 function ls() {
   if [ -z "$1" ]
   then
@@ -160,11 +172,13 @@ function ls() {
   fi
 }
 
+# Call ls after a call to clear
 function clear() {
   /usr/bin/clear
   /bin/ls --color=auto
 }
 
+# Clear the screen before directory changes
 function cd() {
   if [ -z "$1" ]
   then
@@ -176,26 +190,10 @@ function cd() {
   clear
 }
 
+# One letter shortcuts for common functions
 alias c='clear'
 alias v='vim'
 alias e='vim'
 
-# Navigation commands for Phoenix/Elixir
-
-# phoenix_go-templates
-alias pgt='cd $ACTIVE_PROJECT/web/templates;'
-# phoenix edit-router
-alias per='vim $ACTIVE_PROJECT/web/router.ex'
-# phoenix go-assets
-alias pga='cd $ACTIVE_PROJECT/web/static/'
-# phoenix go-fonts
-alias pgf='cd $ACTIVE_PROJECT/web/static/assets/fonts'
-# phoenix go-javascripts
-alias pgj='cd $ACTIVE_PROJECT/web/static/js'
-# phoenix go-css
-alias pgc='cd $ACTIVE_PROJECT/web/static/css'
-#phoenix new
-function mpn() {
-  cd $HOME/elixir/
-  mix phoenix.new $1
-}
+# Enable rbenv/ruby, etc..
+export PATH="$HOME/.rbenv/bin:$PATH"
