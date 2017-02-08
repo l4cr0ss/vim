@@ -197,3 +197,6 @@ alias e='vim'
 
 # Enable rbenv/ruby, etc..
 export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
+export RAILS_ENV="production"
