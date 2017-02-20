@@ -68,6 +68,9 @@ nnoremap <leader>mpr ^[:!mix phoenix.routes<CR>
 " Set hotkey for toggling 'paste' mode
 set pastetoggle=<leader>p
 
+" Set hotkey for toggling line numbers
+nnoremap <leader>n :set nonumber!<CR>
+
 " Maps for moving forward/backward between buffers based on last file edited
 nnoremap <leader>q :BufSurfBack<CR>
 nnoremap <leader>w :BufSurfForward<CR>
