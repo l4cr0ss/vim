@@ -1,84 +1,96 @@
-" Hide buffers instead of closing them
-set hidden
+" Improvements from Vi
+set nocompatible
+set showcmd       " Show (partial) command in status line.
+set showmatch     " Show matching brackets.
+set ignorecase    " Do case insensitive matching
+set smartcase     " Do smart case matching
+set incsearch     " Incremental search
+set autowrite     " Automatically save before commands like :next, :make
+set hidden        " Hide buffers when they are abandoned                 
+set mouse=        " Disable mouse tomfoolery
+"set mouse=a       " Enable mouse usage (all modes)
 
-" Remember undo history
-set undofile
-set undodir=$HOME/.vim/history/
+" Set dark background
+set bg=dark
 
-" Maps for common typos
-command! W w
-command! Q q
-command! WQ wq
-command! Wq wq
+" Skip the intro message
+set shortmess=atI
 
-" Default tabstop/shiftwidth/tab settings
-set ts=2 sw=2 expandtab
-
-" Perform autoindent
-set autoindent
-
-" Turn on line numbers by default
-set number
-
-" Configure pathogen for plugins
-execute pathogen#infect()
-
-" Set the leader key combo
-let mapleader=""
-
-" Key combo for editing .vimrc and automatically reloading
-nnoremap <leader>ev :e ~/.vimrc<CR>
-augroup automaticallySourceVimrc
-  au!
-  au bufwritepost .vimrc source ~/.vimrc
-augroup END
-
-" Maps for moving to the beginning/end of the line
-nnoremap <leader>d $
-nnoremap <leader>a 0
-
-" Nop the help shortcut in all modes
+" Set list chars - toggle using F1
+set listchars=tab:→,,space:·,nbsp:⎵,trail:•,eol:¶,precedes:«,extends:»
 nnoremap <F1> <nop>
 inoremap <F1> <nop>
 vnoremap <F1> <nop>
 
-" Maps for adding empty lines above/below cursor in normal mode
-nnoremap zj moo<esc>k`o
-nnoremap zk moO<esc>`o
+" Set line numbers - toggle using F2
+set number relativenumber
+nnoremap <F2> :set number! relativenumber!<ENTER>
+inoremap <F2> <C-O>:set number! relativenumber!<ENTER>
+vnoremap <F2> <ESC>:set number! relativenumber!<ENTER>gv
 
-" Maps for saving the current buffer
-nnoremap ;; :w<CR>
-nnoremap <leader>; :wq<CR>
+" Set nopaste - toggle using F3
+set nopaste
+nnoremap <F3> :set nopaste!<ENTER>
+inoremap <F3> <C-O>:set nopaste!<ENTER>
+vnoremap <F3> <ESC>:set nopaste!<ENTER>gv
 
-" Maps for quitting without saving
-nnoremap <leader><Return> :q!<CR>
+" Re-source .vimrc (this file) using F12
+nnoremap <F12> :so ~/.vimrc<ENTER>
+inoremap <F12> <C-O>:so ~/.vimrc<ENTER>
+vnoremap <F12> <ESC>:so ~/.vimrc<ENTER>gv
 
-" Options for the FormatSQL plugin
-let sqlutil_align_comma=1
-let sqlutil_align_where=1
-let sqlutil_align_first_word=1
-vmap <leader>fsql :SQLUFormatter<CR>
+" Set the ruler
+set ruler
+set cc=80
 
-" Maps for Elixir's mix utility
-inoremap <leader>mc :!mix compile<CR>
-nnoremap <leader>mc :!mix compile<CR>
-inoremap <leader>mpr ^[:!mix phoenix.routes<CR>
-nnoremap <leader>mpr ^[:!mix phoenix.routes<CR>
+" Set tabstops and text length
+set tabstop=8 shiftwidth=8 noexpandtab textwidth=72
 
-" Set hotkey for toggling 'paste' mode
-set pastetoggle=<leader>p
+" Auto-wrap text using textwidth
+" http://vimdoc.sourceforge.net/htmldoc/change.html#fo-table
+set formatoptions+=t
 
-" Set hotkey for toggling line numbers
-nnoremap <leader>n :set nonumber!<CR>
+" Alias common typos
+command W w
+command Wq wq
+command WQ wq
+command Q q
+command Qa qa
+command QA qa
+command Set set
+command Term term
 
-" Maps for moving forward/backward between buffers based on last file edited
-nnoremap <leader>q :BufSurfBack<CR>
-nnoremap <leader>w :BufSurfForward<CR>
+" Enable syntax highlighting by default
+if has("syntax")
+  syntax on
+endif
 
-" Make the variable under the cursor into a pointer
-inoremap <leader>mp <C-O>ciw*<C-O>p
+if has("autocmd")
+  " Jump to last position when reopening a file
+  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+  " Load indentation rules and plugins according to detected filetype
+  filetype plugin indent on
+endif
 
-"Paste the 0 register in insert mode
-inoremap <leader>po <C-O>"0p
+" ~/.vim/ftplugin/gitcommit.vim
+" when editing commit messages, jump to the end of the line and insert
+au! VimEnter COMMIT_EDITMSG exec 'norm gg$'
 
-syntax enable
+" Persist undo history across sessions
+set undofile
+set undodir=$HOME/.vim/history/
+
+" Mac OS X specific settings
+if has("macunix")
+  " Backspace over newlines
+  set backspace=eol,indent,start
+endif
+
+" Don't reset the cursor when moving
+set nostartofline
+
+" Configure the statusline
+" http://vimdoc.sourceforge.net/htmldoc/options.html#'statusline'
+set statusline=%<%F%h%m%r\ -\ %b\ (0x%B)%=[%o\ (0x%O)/%{line2byte(line(\"$\")+1)-1}B]\ %l,%c\ %P laststatus=2
+hi  StatusLineNC term=NONE cterm=NONE ctermfg=0 ctermbg=242 gui=NONE guibg=DarkGrey
+

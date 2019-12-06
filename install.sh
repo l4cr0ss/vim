@@ -1,13 +1,4 @@
-#!/bin/bash
-touch ~/.vimrc
-touch ~/.bashrc
-touch ~/.dircolors
+#!/bin/sh
 
-rm ~/.vimrc
-rm ~/.bashrc
-rm ~/.dircolors
-
-ln -s .vim/.vimrc ~/.vimrc
-ln -s .vim/.bashrc ~/.bashrc
-ln -s .vim/.dircolors ~/.dircolors
-
+cp ~/.vimrc ~./.vimrc_old
+cp ./.vimrc ~/.vimrc
