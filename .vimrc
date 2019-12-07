@@ -51,14 +51,14 @@ set tabstop=8 shiftwidth=8 noexpandtab textwidth=72
 set formatoptions+=t
 
 " Alias common typos
-command W w
-command Wq wq
-command WQ wq
-command Q q
-command Qa qa
-command QA qa
-command Set set
-command Term term
+command! W w
+command! Wq wq
+command! WQ wq
+command! Q q
+command! Qa qa
+command! QA qa
+command! Set set
+command! Term term
 
 " Enable syntax highlighting by default
 if has("syntax")
