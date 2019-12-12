@@ -18,9 +18,9 @@ set shortmess=atI
 
 " Set list chars - toggle using F1
 set listchars=tab:→,,space:·,nbsp:⎵,trail:•,eol:¶,precedes:«,extends:»
-nnoremap <F1> <nop>
-inoremap <F1> <nop>
-vnoremap <F1> <nop>
+nnoremap <F1> :set list!<ENTER>
+inoremap <F1> <C-O>:set list!<ENTER>
+vnoremap <F1> <ESC>:set list!<ENTER>gv
 
 " Set line numbers - toggle using F2
 set number relativenumber
@@ -33,6 +33,11 @@ set nopaste
 nnoremap <F3> :set nopaste!<ENTER>
 inoremap <F3> <C-O>:set nopaste!<ENTER>
 vnoremap <F3> <ESC>:set nopaste!<ENTER>gv
+
+set noexpandtab
+nnoremap <F4> :set noexpandtab!<ENTER>
+inoremap <F4> <C-O>:set noexpandtab!<ENTER>
+vnoremap <F4> <ESC>:set noexpandtab!<ENTER>gv
 
 " Re-source .vimrc (this file) using F12
 nnoremap <F12> :so ~/.vimrc<ENTER>
@@ -52,8 +57,15 @@ set formatoptions+=t
 
 " Alias common typos
 command! W w
+command! Wa wa
+command! WA wa
 command! Wq wq
 command! WQ wq
+command! Wqa wqa
+command! WQa wqa
+command! WQA wqa
+command! Vs vs
+command! VS vs
 command! Q q
 command! Qa qa
 command! QA qa
